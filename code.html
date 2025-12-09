@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload dan Download Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        video {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .download-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .download-link:hover {
+            background-color: #0056b3;
+        }
+        #video-preview {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload dan Download Video</h1>
+        <form id="upload-form">
+            <label for="video-file">Pilih file video:</label>
+            <input type="file" id="video-file" accept="video/*" required>
+            <button type="submit">Upload Video</button>
+        </form>
+        
+        <div id="video-preview">
+            <h2>Video Anda:</h2>
+            <video controls>
+                <source id="video-source" src="" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <a id="download-link" class="download-link" href="" download="video.mp4">Download Video</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const videoFile = document.getElementById('video-file');
+        const videoPreview = document.getElementById('video-preview');
+        const videoSource = document.getElementById('video-source');
+        const downloadLink = document.getElementById('download-link');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah submit form (karena tidak ada backend)
+            
+            const file = videoFile.files[0];
+            if (file) {
+                // Simulasi: Buat URL objek untuk preview (tidak menyimpan ke server)
+                const fileURL = URL.createObjectURL(file);
+                videoSource.src = fileURL;
+                downloadLink.href = fileURL;
+                downloadLink.download = file.name;
+                
+                // Tampilkan preview
+                videoPreview.style.display = 'block';
+                alert('Video berhasil "di-upload" (simulasi). Anda bisa melihat dan download-nya.');
+            }
+        });
+    </script>
+</body>
+</html>
